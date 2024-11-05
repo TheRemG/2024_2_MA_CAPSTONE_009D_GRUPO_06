@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    {% load static %}
+
+    <title>VENTWEB</title> 
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>VENTWEB</h1>
+            <div id="user-info">
+                <button id="login-btn" onclick="openLoginModal()">Iniciar Sesión</button>
+                <button id="logout-btn" style="display: none;" onclick="logout()">Cerrar Sesión</button>
+                <button onclick="window.location.href='chat.html'">Chats</button>
+            </div>
+        </nav>
+    </header>
+    
+
+    <div id="filter"> <!-- Contenedor para el filtro y búsqueda de productos -->
+        <input type="text" id="search-input" placeholder="Buscar productos..."> 
+        <button onclick="togglePublishForm()">Publicar Producto</button> <!-- Botón para mostrar el formulario de publicación de productos -->
+        <select id="category-filter">
+            <option value="">Todas las categorías</option>
+            <option value="electronica">Electrónica</option>
+            <option value="ropa">Ropa</option>
+            <option value="hogar">Hogar</option>
+            <option value="deportes">Deportes</option>
+        </select>
+        
+    </div>
+
+    <div id="publish-form" style="display:none;"> <!-- Formulario para publicar un producto-->
+        <h2>Publicar Producto</h2> 
+        <input type="text" id="product-name" placeholder="Nombre del producto" required> 
+        <textarea id="product-description" placeholder="Descripción del producto" required></textarea> 
+        <input type="number" id="product-price" placeholder="Precio" required> 
+        <input type="text" id="product-location" placeholder="Ubicación" required> 
+        <select id="product-category" required> 
+            <option value="">Seleccionar categoría</option> 
+            <option value="electronica">Electrónica</option> 
+            <option value="ropa">Ropa</option> 
+            <option value="hogar">Hogar</option>
+            <option value="deportes">Deportes</option> 
+        </select>
+        <input type="file" id="product-images" accept="image/*" multiple required> <!-- Campo para subir imágenes del producto -->
+        <img id="image-preview" src="" alt="Vista previa de la imagen"> 
+        <button onclick="publishProduct()">Publicar</button> 
+    </div>
+    
+    <div id="products-container"></div> <!-- Contenedor para mostrar los productos publicados -->
+
+    <div id="login-modal" class="modal"> <!-- Modal para iniciar sesión -->
+        <div class="modal-content"> 
+            <span class="close" onclick="closeLoginModal()">&times;</span> 
+            <h2>Iniciar Sesión</h2> 
+            <input type="text" id="login-username" placeholder="Nombre de usuario" required> 
+            <input type="password" id="login-password" placeholder="Contraseña" required> 
+            <button onclick="login()">Iniciar Sesión</button>
+        </div>
+    </div>
+
+    <script src="% static 'js/script.js' %"></script> 
+</body>
+</html>
