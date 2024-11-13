@@ -10,47 +10,16 @@
     <link rel="stylesheet" href="{% static 'css/registro.css' %}">
     <script src="{% static 'js/form.js' %}"></script>
     <title>VentWeb</title>
+    
 </head>
 <body>
     <div class="div">
         <form method="POST" action="{% url 'logon' %}">
             <h1>Registrarse</h1>
             {% csrf_token %}
-
-            <label for="id_nombre">Ingrese su nombre:</label>
-            {{form.nombre}}
-            {% if form.nombre.errors %}
-            <ul>
-                {% for error in form.nombre.errors %}
-                    <li style="color: red;">{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-            <br>
-            <label for="id_email">Correo electronico:</label>
-            {{form.email}}
-            {% if form.email.errors %}
-            <ul>
-                {% for error in form.email.errors %}
-                    <li style="color: red;">{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-            <br>
-            <label for="id_rut">Ingrese su rut:</label>
-            {{form.rut}}
-            {% if form.rut.errors %}
-            <ul>
-                {% for error in form.rut.errors %}
-                    <li style="color: red;">{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-            <br>
-            <label for="id_password">Ingrese su contraseña</label>
-            {{form.password}}
+            {{ form }}
                 <input  class="inicio" type="submit" value="iniciar" >
-                <button type="button" class="btn btn-secondary" onclick="history.back()">Volver</button>
+                <button type="submit">Volver</button>
             </div>
         </form>
     </div>

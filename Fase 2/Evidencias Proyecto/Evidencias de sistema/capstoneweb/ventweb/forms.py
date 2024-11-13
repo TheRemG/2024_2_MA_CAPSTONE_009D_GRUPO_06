@@ -1,53 +1,44 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-import re
+from .models import Usuario
 
+class ClienteForm(forms.ModelForm):
 
-
-"""
-def validar_rut(value):
-
-    rut_pattern = r"^(\d{1,2})\.(\d{3})\.(\d{3})-(\d{1,2})$"
-    match = re.match(rut_pattern, value)
-    
-    if not match:
-        raise ValidationError("Formato de RUT inválido. Debe ser XX.XXX.XXX-X")
-    
-    rut_sin_dv = value.replace(".", "").split("-")[0]
-    digito_verificador = value.split("-")[1]
-    
-    # Validar el RUT con el dígito verificador
-    if not verificar_rut(rut_sin_dv, digito_verificador):
-        raise ValidationError("RUT inválido.")
-    
-    return value
-
-def verificar_rut(rut_sin_dv, digito_verificador):
-    suma = 0
-    multiplicador = 2
-    for digito in reversed(rut_sin_dv):
-        suma += int(digito) * multiplicador
-        multiplicador = 9 if multiplicador == 7 else multiplicador + 1
-    
-    resto = suma % 11
-    digito_calculado = 11 - resto
-    
-    if digito_calculado == 10:
-        digito_calculado = "K"
-    elif digito_calculado == 11:
-        digito_calculado = "0"
-    
-    return str(digito_calculado).upper == digito_verificador.upper()
-
-# Formulario de registro
-class RegistroForm(forms.Form):
-    username = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    rut = forms.CharField(max_length=12, validators=[validar_rut, verificar_rut])
-    password = forms.CharField(widget=forms.PasswordInput, min_length=6, label="Contraseña")
-
-class Meta:
-    model = User
-    fields = ("username", "email", "rut", "password")"""
+    class Meta:
+        model = Usuario
+        fields = ['rut', 'nombre', 'email', 'password']
+        labels = {
+            'rut' : 'Rut',
+            'nombre' : 'Nombre',
+            'email' : 'Email',
+            'password' : 'Password',
+        }
+        widgets = {
+            'rut' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder' : 'Ingrese su rut',
+                    'id' : 'rut'
+                }
+            ),
+            'nombre' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder' : 'Ingrese su nombre completo',
+                    'id' : 'nombre'
+                }
+            ),
+            'email' : forms.EmailInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder' : 'Ingrese su correo',
+                    'id' : 'email'
+                }
+            ),
+            'password' : forms.PasswordInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder' : 'Ingrese su contraseña',
+                    'id' : 'password'
+                }
+            )
+        }
