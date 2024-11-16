@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import ClienteForm, LoginForm
 from django.contrib import messages
-from .models import Usuario
+from .models import Usuario, Imagen
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    imagenes = Imagen.objects.all().order_by('-fecha_subida')
+    return render(request, 'index.html', {'imagenes' , imagenes})
 
 def logon(request):
     if request.method == 'POST':
@@ -40,3 +42,18 @@ def login(request):
         form = LoginForm()
 
     return render(request, 'login.html', {'form' : form})
+    
+
+@login_required
+def subir_imagen(request):
+    if request.method == 'POST':
+        imgForm = ImagenForm(request.POST, request.FILES)
+        if imgForm.is_valid():
+            imagen = imgForm(commit=False)
+            imagen.usuario = request.Usuario
+            imagen.save()
+            return redirect('index')
+    else:
+        imgForm = ImagenForm()
+    
+    return render(request, 'subImg.html', {'form' , imgForm})

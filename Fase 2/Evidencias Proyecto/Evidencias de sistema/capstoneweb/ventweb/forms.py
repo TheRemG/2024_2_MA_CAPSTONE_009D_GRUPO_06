@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario
+from .models import Usuario, Imagen
 
 class ClienteForm(forms.ModelForm):
 
@@ -63,4 +63,30 @@ class LoginForm(forms.Form):
                 'placeholder': 'Ingrese su contraseña',
             }
         )
+    )
+
+class ImagenForm(forms.ModelForm:
+    class Meta:
+        model = Imagen
+        fields = [
+            'titulo',
+            'descripcion',
+            'imagen'
+        widgets = {
+            'titulo': forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder' : 'Titulo de la producto',
+                }),
+            'descripcion' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder' : 'Descripcion del producto',
+                }),
+            'imagen' : forms.ClearableFileInput(
+                attrs={
+                    'class' : 'form-control',
+                }),
+        }
+        ]
     )
