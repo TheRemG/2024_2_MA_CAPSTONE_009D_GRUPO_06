@@ -17,6 +17,13 @@
             <div class="password" required>
                 {% csrf_token %}
                 {{ form.as_p }}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <input  class="inicio" type="submit" value="iniciar">
                 <button type="button" class="btn btn-secondary" href="{% url 'index' %}">Volver</button>
             </div>

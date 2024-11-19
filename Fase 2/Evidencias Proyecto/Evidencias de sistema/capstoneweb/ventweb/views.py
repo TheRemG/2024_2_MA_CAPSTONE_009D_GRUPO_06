@@ -27,14 +27,25 @@ def preguntasfrecuentes(request):
 
 def logon(request):
     if request.method == 'POST':
-        usuario = ClienteForm(request.POST)
-        if usuario.is_valid():
+        usuario_form = ClienteForm(request.POST)
+        if usuario_form.is_valid():
+            # Guarda al usuario
+            usuario = usuario_form.save(commit=False)
+            usuario.set_password(usuario.password)  # Asegura que la contraseña se cifre
             usuario.save()
-            messages.success(request, "Usuario registrado con exito")
-            return redirect('index')
-    else: 
-        usuario = ClienteForm()
-    return render(request, 'logon.html', {'form': usuario})
+
+            # Autentica al usuario recién creado
+            user = authenticate(request, username=usuario.rut, password=request.POST['password'])
+            if user is not None:
+                login(request, user)  # Inicia sesión automáticamente
+                messages.success(request, "Usuario registrado e iniciado sesión con éxito")
+                return redirect('index')  # Redirige a la página principal
+        else:
+            messages.error(request, "Por favor, corrige los errores del formulario.")
+    else:
+        usuario_form = ClienteForm()
+    return render(request, 'logon.html', {'form': usuario_form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -43,14 +54,13 @@ def login_view(request):
             rut = form.cleaned_data['rut']
             password = form.cleaned_data['password']
 
-            # Intentar autenticar al usuario
+            # Autenticar usuario
             user = authenticate(request, username=rut, password=password)
-            if user is not None:
-                # Si el usuario es válido, iniciar sesión
-                login(request, user)
 
-                # Redirigir a la página de destino o al índice
-                next_page = request.GET.get('next') or 'index'
+            if user is not None:
+                login(request, user)  # Iniciar sesión
+                messages.success(request, f"Bienvenido, {user.nombre}")
+                next_page = request.GET.get('next', 'index')
                 return redirect(next_page)
             else:
                 messages.error(request, "Usuario o contraseña incorrectos")
@@ -65,12 +75,13 @@ def logout_view(request):
     logout(request)
     return redirect('index')
 
+@login_required
 def subir_imagen(request):
     if request.method == 'POST':
         imgForm = ImagenForm(request.POST, request.FILES)
         if imgForm.is_valid():
             imagen = imgForm.save(commit=False)
-            #imagen.usuario = request.user
+            imagen.usuario = request.user
             imagen.save()
             return redirect('index')
     else:

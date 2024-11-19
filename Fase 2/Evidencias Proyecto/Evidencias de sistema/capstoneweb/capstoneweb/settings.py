@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'capstoneweb.urls'
+AUTHENTICATION_BACKENDS = ['ventweb.backends.RUTBackend']
 
 TEMPLATES = [
     {
@@ -125,7 +126,9 @@ MEDIA_URL = 'img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'img',)
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+AUTH_USER_MODEL = 'ventweb.Usuario'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
