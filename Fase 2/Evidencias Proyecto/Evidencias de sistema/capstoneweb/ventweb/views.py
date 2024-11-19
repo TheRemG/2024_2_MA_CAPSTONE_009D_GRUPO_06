@@ -4,13 +4,26 @@ from django.contrib import messages
 from .models import Usuario, Imagen
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
+from django.db.models import Q  # Importar Q para consultas complejas
 
 # Create your views here.
 
 def index(request):
-    imagenes = Imagen.objects.all().order_by('-fecha_subida')
-    return render(request, 'index.html', {'imagenes' : imagenes})
+    # Obtenemos el término de búsqueda desde la solicitud GET (si existe)
+    search_query = request.GET.get('search', '')
 
+    # Filtrar las imágenes si hay un término de búsqueda
+    if search_query:
+        imagenes = Imagen.objects.filter(titulo__icontains=search_query).order_by('-fecha_subida')
+    else:
+        imagenes = Imagen.objects.all().order_by('-fecha_subida')
+
+        
+
+    return render(request, 'index.html', {'imagenes': imagenes, 'search_query': search_query})
+
+def preguntasfrecuentes(request):
+    return render(request, 'preguntasfrecuentes.html')
 
 def logon(request):
     if request.method == 'POST':
@@ -50,7 +63,7 @@ def login_view(request):
     
 def logout_view(request):
     logout(request)
-    return render(request, 'login')
+    return redirect('index')
 
 def subir_imagen(request):
     if request.method == 'POST':
@@ -64,4 +77,3 @@ def subir_imagen(request):
         imgForm = ImagenForm()
     
     return render(request, 'subir_imagen.html', {'form' : imgForm})
-

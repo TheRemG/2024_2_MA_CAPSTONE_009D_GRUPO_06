@@ -125,7 +125,7 @@ MEDIA_URL = 'img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'img',)
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'index'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

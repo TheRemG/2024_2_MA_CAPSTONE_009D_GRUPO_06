@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/subir_imagen.css' %}">
 </head>
 <body>
     <div>
@@ -12,7 +13,7 @@
             <h1>Subir producto</h1>
             <div>
                 {% csrf_token %}
-                {{ form }}
+                {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Subir</button>
             </div>
         </form>

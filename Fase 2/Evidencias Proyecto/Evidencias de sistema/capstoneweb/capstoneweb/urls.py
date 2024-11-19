@@ -29,7 +29,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('login_view/', views.login, name='login_view'),
     path('subir_imagen/', views.subir_imagen, name='subir_imagen'),
-
+    path('preguntasfrecuentes/', views.preguntasfrecuentes, name='preguntasfrecuentes'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
