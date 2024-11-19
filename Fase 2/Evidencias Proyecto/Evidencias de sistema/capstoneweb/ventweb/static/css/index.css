@@ -202,11 +202,8 @@ button:hover {
 .close:hover {
     color: #ff0000; 
 }
-#image-preview {
-    width: 300px; 
-    height: auto; 
-    display: block; 
-    margin: 10px 10px; 
-}
 
+#publish-form {
+    display: none; /* Ocultarlo inicialmente */
+}
 

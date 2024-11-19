@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{% static 'css/registro.css' %}">
     <script src="{% static 'js/form.js' %}"></script>
     <title>VentWeb</title>
-    
 </head>
 <body>
     <div class="div">
@@ -18,6 +17,13 @@
             <h1>Registrarse</h1>
             {% csrf_token %}
             {{ form }}
+            {% if form.errors %}
+                <ul style="color: red;">
+                    {% for field, errors in form.errors.items %}
+                        <li>{{ field }}: {{ errors|join:", " }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
                 <input  class="inicio" type="submit" value="iniciar" >
                 <button type="submit">Volver</button>
             </div>

@@ -17,12 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ventweb import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('logon/', views.logon, name='logon'),
-    path('login/', views.login, name='login'),
+    path('login/', views.login_view, name='login'),
+    path('login_view/', views.login, name='login_view'),
+    path('subir_imagen/', views.subir_imagen, name='subir_imagen'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
