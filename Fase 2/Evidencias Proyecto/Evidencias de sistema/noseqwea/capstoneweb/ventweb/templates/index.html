@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    {% load static %}
+
+    <title>VENTWEB</title> 
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'index' %}">
+                <h1>VENTWEB</h1>
+            </a>
+            <a href="{% url 'preguntasfrecuentes' %}" class="btn-preguntas">Preguntas Frecuentes</a>
+        <div id="user-info">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="btn">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn">Iniciar Sesión</a>
+                <a href="{% url 'logon' %}" clas="btn">Registrarse</a>
+            {% endif %}
+        </div>
+        </nav>
+    </header>
+
+    <div id="filter">
+        <form method="get" action="{% url 'index' %}">
+            <input type="text" name="search" id="search-input" placeholder="Buscar productos..." value="{{ request.GET.search }}">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    
+    <!-- Formulario para publicar un producto-->
+    <a href="{% url 'subir_imagen' %}" class="btn-publicar">
+        <h2>Publicar Producto</h2>
+    </a>
+    <div class="row">
+        {% for imagen in imagenes %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{{ imagen.imagen.url }}" class="card-img-top" alt="{{ imagen.titulo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ imagen.titulo }}</h5>
+                    <p class="card-text">{{ imagen.descripcion }}</p>
+                    <p><strong>Contactos:</strong>{{ imagen.contactos }}</p>
+                    <p class="text-muted">Subido por {{ imagen.usuario.nombre }}</p> <!-- Asegúrate de que 'usuario' tenga el campo 'username' -->
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay imágenes disponibles.</p>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
