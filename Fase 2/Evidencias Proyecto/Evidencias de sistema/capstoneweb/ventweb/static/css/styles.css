@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: o;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.navbar{
+    background-color: rgb(191, 227, 218) !important;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+.container {
+    position: relative;
+}
+
+input {
+    padding: 10px;
+    padding-right: 35px;
+    align-items: 5 px 0 0 5px;
+    border: 0;
+    outline: none;
+    border-radius: 2;
+}
+
+button { 
+    background-color: green;
+    width: 40px;
+    height: 30px;
+    padding: 10px;
+    border: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 0 5px 5px 0;
+    color: white;
+    border-radius: 4;
+}
+
+

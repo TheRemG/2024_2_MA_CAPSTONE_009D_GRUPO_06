@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Preguntas Frecuentes - VENTWEB</title>
+    <link rel="stylesheet" href="{% static 'css/preguntasfrecuentes.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'index' %}">
+                <h1>VENTWEB</h1>
+            </a>
+            <div id="user-info">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn">Cerrar Sesión</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn">Iniciar Sesión</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="faq-section">
+            <div class="faq-container">
+                <h2>Preguntas Frecuentes</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">¿Por que piden el rut al registrarme?</button>
+                    <div class="faq-answer">
+                        <p>Solicitamos el RUT para garantizar la seguridad en la plataforma, permitiendo verificar la identidad de los usuarios. Esto ayuda a prevenir fraudes y asegura que aquellos con malas intenciones piensen dos veces antes de actuar. Queremos ofrecerte un entorno confiable y seguro.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué hago si tengo un problema con un producto después de la venta?</button>
+                    <div class="faq-answer">
+                        <p>Cualquier inconveniente con un producto debe resolverse directamente entre el comprador y el vendedor. La plataforma facilita la comunicación, pero no se encarga de los conflictos post-venta.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">¿Por que no tiene carrito de compra?</button>
+                    <div class="faq-answer">
+                        <p>Nuestra página está diseñada para que los usuarios exploren los productos y se comuniquen directamente con los vendedores. No ofrecemos compras directas para facilitar una interacción más personalizada, donde comprador y vendedor puedan coordinar detalles como entrega, envío y compartir información de contacto, garantizando una experiencia más flexible y segura.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo se garantiza la seguridad al compartir información fuera de la página?</button>
+                    <div class="faq-answer">
+                        <p>La página pide el RUT para verificar la identidad del usuario y brindar mayor seguridad. Aún así, se recomienda ser cauteloso al compartir información personal fuera de la plataforma.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Puedo vender productos fuera de mi ciudad o región? </button>
+                    <div class="faq-answer">
+                        <p>Sí, puedes vender a cualquier región. Sin embargo, es importante coordinar con el comprador la logística de envío o entrega, ya que depende del acuerdo entre ambas partes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">¿Por que no hay boton de reportar?</button>
+                    <div class="faq-answer">
+                        <p>Al solicitar el RUT, buscamos garantizar la seguridad y confianza en nuestra plataforma. Actualmente, confiamos en este sistema de identificación, pero estamos comprometidos en mejorar constantemente. No descartamos la posibilidad de incluir un botón de reporte en futuras actualizaciones para ofrecer aún más protección a nuestros usuarios.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{% static 'js/preguntasfrecuentes.js' %}"></script>
+</body>
+</html>
