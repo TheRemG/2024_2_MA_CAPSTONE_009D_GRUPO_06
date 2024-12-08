@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/subir_imagen.css' %}">
+</head>
+<body>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <h1>Subir producto</h1>
+            <div>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Subir</button>
+                <a href="{% url 'index' %}" class="btn btn-secondary" type="button">Volver</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

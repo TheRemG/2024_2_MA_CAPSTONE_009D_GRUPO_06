@@ -1,0 +1,275 @@
+/* Reset de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    height:auto;
+    box-sizing: border-box;
+}
+
+body {
+  flex-direction: column;  
+  min-height: 100vh; 
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+}
+
+main {
+    flex: 1;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #2ecc71;
+    padding: 20px;
+}
+
+header h1 {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+/* Estilo para la barra de filtro */
+#filter {
+    display:flex;
+    justify-content:baseline;
+    padding: 10px 10px;
+}
+
+#filter input,
+#filter select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 60%;
+}
+
+#filter button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#filter button:hover {
+    background-color: #1e8449;
+}
+
+/* Diseño de las publicaciones */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    min-height: calc(100vh - 200px); 
+}
+
+.col-md-4 {
+    width: 32%;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit:contain;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-text {
+    font-size: 20px;
+    color: #555;
+}
+
+.card-contact{
+  font-size: 18px;
+  color: black;
+}
+
+.text-muted {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Estilos para el botón "Publicar Producto" */
+/* Efecto hover para el botón */
+.btn-publicar:hover {
+    background-color: #0056b3; /* Cambia el color de fondo en hover */
+    transform: translateY(-3px); /* Efecto de elevación al pasar el ratón */
+  }
+
+/* Efecto activo para el botón */
+.btn-publicar:active {
+    transform: translateY(1px); /* Efecto de compresión al hacer clic */
+}
+footer {
+    background-color: #34495e;
+    color: #ecf0f1;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; 
+    
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .footer-section {
+    flex: 1 1 300px;
+  }
+  
+  .footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #1abc9c;
+  }
+  
+  .footer-section p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .social-icons a {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #ecf0f1;
+    text-decoration: none;
+  }
+  
+  .social-icons a:hover {
+    color: #1abc9c;
+  }
+  
+  /* Footer Bottom */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #1abc9c;
+    font-size: 14px;
+  }
+/* Estilos Generales para los enlaces */
+a {
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    color: inherit; /* Hereda el color del texto para los enlaces */
+  }
+  
+  /* Botones Generales */
+  .btn, .btn-preguntas {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #1abc9c; /* Color de fondo predeterminado */
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+  }
+  
+  .btn:hover, .btn-preguntas:hover {
+    background-color: #16a085; /* Color de fondo al pasar el mouse */
+    transform: translateY(-2px); /* Efecto de levantar el botón */
+  }
+  
+  /* Estilo específico para el enlace de 'Preguntas Frecuentes' */
+  .btn-preguntas {
+    background-color: #3498db; /* Color de fondo personalizado para preguntas frecuentes */
+  }
+  
+  .btn-preguntas:hover {
+    background-color: #2980b9; /* Color de fondo más oscuro al pasar el mouse */
+  }
+  
+  /* Estilo para el contenedor de usuario */
+  #user-info {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  #user-info .btn {
+    background-color: #f39c12; /* Color de fondo para los botones de sesión */
+  }
+  
+  #user-info .btn:hover {
+    background-color: #e67e22; /* Color de fondo al pasar el mouse */
+  }
+  
+  /* Estilo para el enlace de 'Registrarse' */
+  #user-info .btn:last-child {
+    background-color: #9b59b6; /* Color de fondo para 'Registrarse' */
+  }
+  
+  #user-info .btn:last-child:hover {
+    background-color: #8e44ad; /* Color de fondo al pasar el mouse */
+  }
+/* Estilos para el botón "Mis Productos" */
+
+.btn-productos:hover {
+  background-color: #218838; /* Cambia a un verde más oscuro cuando se pasa el ratón */
+  transform: translateY(-3px); /* Eleva ligeramente el botón */
+}
+
+.btn-productos:active {
+  transform: translateY(1px); /* Efecto de presión cuando se hace clic */
+}
+.btn-publicar, .btn-productos {
+  font-size: 16px; /* Tamaño de texto para los botones */
+  font-weight: bold; /* Texto en negrita */
+  padding: 10px 15px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+  text-align: center; /* Centra el texto dentro del botón */
+}
+
+.btn-publicar {
+  background-color: #007bff; /* Fondo azul para el botón de publicar */
+  color: white; /* Color del texto */
+}
+
+.btn-productos {
+  background-color: #28a745; /* Fondo verde para el botón de productos */
+  color: white; /* Color del texto */
+}
+
+
+
+  
