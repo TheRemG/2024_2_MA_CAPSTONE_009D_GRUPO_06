@@ -1,6 +1,7 @@
 from django import forms
 from .models import Usuario, Imagen
-import re
+from .validators import validar_rut
+
 
 class ClienteForm(forms.ModelForm):
 
@@ -44,52 +45,11 @@ class ClienteForm(forms.ModelForm):
             )
         }
 
-from django import forms
-from .models import Usuario, Imagen
-import re
-
-class ClienteForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['rut', 'nombre', 'email', 'password']
-        labels = {
-            'rut': 'Rut',
-            'nombre': 'Nombre',
-            'email': 'Email',
-            'password': 'Password',
-        }
-        widgets = {
-            'rut': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese su rut sin puntos ni guión',
-                    'id': 'rut'
-                }
-            ),
-            'nombre': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese su nombre completo',
-                    'id': 'nombre'
-                }
-            ),
-            'email': forms.EmailInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese su correo',
-                    'id': 'email'
-                }
-            ),
-            'password': forms.PasswordInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese su contraseña',
-                    'id': 'password'
-                }
-            )
-        }
-
-
+        def clean_rut(self):
+            rut = self.cleaned_data.get('rut')
+            if not validar_rut(rut):
+                raise forms.ValidationError("El RUT ingresado no es válido.")
+            return rut
 
 class LoginForm(forms.Form):
     rut = forms.CharField(

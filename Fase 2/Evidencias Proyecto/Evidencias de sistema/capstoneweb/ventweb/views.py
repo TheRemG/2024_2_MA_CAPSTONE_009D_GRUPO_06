@@ -9,10 +9,9 @@ from django.db.models import Q  # Importar Q para consultas complejas
 # Create your views here.
 
 def index(request):
-    # Obtenemos el término de búsqueda desde la solicitud GET (si existe)
+
     search_query = request.GET.get('search', '')
 
-    # Filtrar las imágenes si hay un término de búsqueda
     if search_query:
         imagenes = Imagen.objects.filter(titulo__icontains=search_query).order_by('-fecha_subida')
     else:
@@ -31,15 +30,17 @@ def logon(request):
         if usuario_form.is_valid():
             # Guarda al usuario
             usuario = usuario_form.save(commit=False)
-            usuario.set_password(usuario.password)  # Asegura que la contraseña se cifre
+            usuario.set_password(usuario.password)  # Hashea la contraseña
             usuario.save()
 
-            # Autentica al usuario recién creado
+            # Autentica e inicia sesión al usuario
             user = authenticate(request, username=usuario.rut, password=request.POST['password'])
             if user is not None:
-                login(request, user)  # Inicia sesión automáticamente
+                login(request, user)  # Inicia la sesión automáticamente
                 messages.success(request, "Usuario registrado e iniciado sesión con éxito")
                 return redirect('index')  # Redirige a la página principal
+            else:
+                messages.error(request, "Error al autenticar el usuario.")
         else:
             messages.error(request, "Por favor, corrige los errores del formulario.")
     else:
